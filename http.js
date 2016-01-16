@@ -32,28 +32,15 @@ write.end();
 
 console.log(write);*/
 
-const BufferList = require('bl');
-var bl = new BufferList();
-
+var bl = require('bl');
+var bl2 = require('bl');
 //var concat = require('concat-stream');
 
 //	console.log(process.argv[2],process.argv[3],process.argv[4]);
 	http.get(process.argv[2], function callback (response) {   
-	//console.log(response.data);	
-/*	 response.on("data", function (data) {
-		 console.log(data.toString());
-	 })*/
-		//response.setEncoding('utf8')
-	    /*response.on("data",function(data){
-	    	bl.append(data.toString());
-	    	console.log(bl.length);	
-	    }*/
-		
-		/*response.pipe(bl(function (err,data){
-			
-		}));*/
 		response.pipe(bl(function(err,data){
-			console.out('data  = '+data);
+			console.log(data.length);
+			console.log(data.toString());
 		}))
 		
 	
@@ -62,4 +49,3 @@ var bl = new BufferList();
 });
 	
 	
-	console.log(bl.length);
