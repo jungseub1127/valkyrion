@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title></title>
+		<script src = "http://code.jquery.com/jquery-1.7.1.js"></script>
+		<script src = "http://localhost:3033/socket.io/socket.io.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			 $(document).ready(function(){
+				var socket = io.connect('http://localhost:3033');
+				socket.on('test', function(data){
+				alert(data);
+				})
+			}) 
+		</script>
+	</body>
+</html>

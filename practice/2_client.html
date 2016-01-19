@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>File Upload__</title>
+	<script src = "http://code.jquery.com/jquery-1.7.1.js"></script>
+	</head>
+	
+	<body>
+		<form action="/upload" , method="post", enctype="multipart/form-data">
+			<input type="file" name="uploadFile"/>
+			<input type="submit" name="Upload"/>
+		</form>
+		<script type="text/javascript">
+		jQuery("#uploadFile").change(function(){
+			var formData = null;
+			var brawoser = false;
+			alert(brawoser+'    '+navigator.appName);
+			if(navigator.appName == "Microsoft Internet Explorer"){
+				brawoser = true;
+				
+			}
+			
+			if(brawoser){
+				document.getElementById("dataform").target = "uploadFrame";
+				var filename = document.getElementById("uploadFile").value;
+				alert('filename = '+filename);
+				filename = filename.substring(filename.lastIndexOf("\\")+1);
+				jQuery("#dataform").submit();
+				document.getElementByid("uploadFrame").onload = function(){
+					alert(filename);
+				}
+			} else{
+				FormData = new FormData(document.getElementsByName("dataform")[0]);
+				jQuery.ajax({
+					type: "post",
+					url: "/upload",
+					data:formData,
+					processData:false,
+					contentType:false,
+					success:function(data){
+						alert(data);
+					},
+					error:function(err){console.log(err);}
+				});
+				document.getElementsByName("uploadFile")[0].form.reset();
+			}
+			
+		});
+		</script>
+		
+		
+	</body>
+</html>
